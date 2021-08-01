@@ -35,7 +35,9 @@ var svg = d3.select("#graph")
 
 
 // Load the data
-d3.csv("BTC-USD-SPY-daily-prices.csv", function(data) {
+d3.csv("BTC-USD-SPY-daily-prices.csv", function(error,data) {
+   if (error) throw error;
+   
 	  data.forEach(function(d) {
 	    //d.Date = d3.timeParse("%Y-%m-%d")(d.Date);
       d.Date = +d.Date;
