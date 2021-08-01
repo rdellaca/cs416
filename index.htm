@@ -60,11 +60,10 @@ function loadScene1(data) {
   // Add X axis --> date format
     var x = d3.scaleTime()
       .domain(d3.extent(data, function(d) { return d.Date; }))
-      .range([ 0, width ])
-      .tickFormat(d3.timeFormat("%b,%y"));
+      .range([ 0, width ]);
     svg.append("g")
       .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x));
+      .call(d3.axisBottom(x).tickFormat(d3.timeFormat("%b,%y")));
 
   // text label for the X axis
      svg.append("text")
