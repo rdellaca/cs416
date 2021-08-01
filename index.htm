@@ -35,13 +35,12 @@ var svg = d3.select("#graph")
 
 
 // Load the data
-d3.csv("BTC-USD-SPY-daily-prices.csv", function(d) {
+data1 = d3.csv("BTC-USD-SPY-daily-prices.csv", function(d) {
 	    d.Date = d3.timeParse("%Y-%m-%d")(d.Date);
-      d.Date = +d.Date;
-      console.log(d.Date)
+      //console.log(d.Date)
 	    d.BTC_Close = +d.BTC_Close;
       return d;
-	  })
+	  });
     //.then?
     loadScene1();
 
@@ -49,7 +48,7 @@ d3.csv("BTC-USD-SPY-daily-prices.csv", function(d) {
 function loadScene1() {
   // Add X axis --> date format
     var x = d3.scaleTime()
-      .domain(d3.extent(data, function(d) { return d.Date; }))
+      .domain(d3.extent(data1, function(d) { return d.Date; }))
       .range([ 0, width ]);
     svg.append("g")
       .attr("transform", "translate(0," + height + ")")
@@ -57,14 +56,14 @@ function loadScene1() {
 
 // Add Y axis
     var y = d3.scaleLinear()
-      .domain([0, d3.max(data, function(d) { return +d.BTC_Close; })])
+      .domain([0, d3.max(data1, function(d) { return +d.BTC_Close; })])
       .range([ height, 0 ]);
     svg.append("g")
       .call(d3.axisLeft(y));
 
     // Add the line
     svg.append("path")
-      .datum(data)
+      .datum(data1)
       .attr("fill", "none")
       .attr("stroke", "steelblue")
       .attr("stroke-width", 1.5)
