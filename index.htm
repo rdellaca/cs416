@@ -38,15 +38,21 @@ var svg = d3.select("#graph")
 var BTC_SPY_data;
 
 d3.csv("BTC-USD-SPY-daily-prices.csv", function(d) {
-	    d.Date = d3.timeParse("%Y-%m-%d")(d.Date);
-      //console.log(d.Date)
+	    d.Date = d3.timeParse("%Y-%m-%d")(d.Date); // store as Date object
 	    d.BTC_Close = +d.BTC_Close;
       d.BTC_Volume = +d.BTC_Volume;
       d.Pctchange_BTC_1day = +d.Pctchange_BTC_1day;
+      d.Pctchange_BTC_1week = +d.Pctchange_BTC_1week;
+      d.Pctchange_BTC_4weeks = +d.Pctchange_BTC_4weeks;
+      d.SPY_Close = +d.SPY_Close;
+      d.SPY_Volume = +d.SPY_Volume;
+      d.Pctchange_SPY_1day = +d.Pctchange_SPY_1day;
+      d.Pctchange_SPY_1week = +d.Pctchange_SPY_1week;
+      d.Pctchange_SPY_4weeks = +d.Pctchange_SPY_4weeks;
       return d;
 	  }).then(function(data) {
-    loadScene1(data);
     BTC_SPY_data = data;
+    loadScene1(BTC_SPY_data);
   });
 
 // Scene 1
