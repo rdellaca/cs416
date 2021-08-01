@@ -64,7 +64,7 @@ function loadScene1(data) {
     svg.append("g")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x))
-      .tickFormat(d3.timeFormat("%b %y")));
+      .tickFormat(d3.timeFormat("%b %y"));
 
   // text label for the X axis
      svg.append("text")
