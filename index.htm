@@ -35,13 +35,16 @@ var svg = d3.select("#graph")
 
 
 // Load the data
-data1 = d3.csv("BTC-USD-SPY-daily-prices.csv", function(d) {
+var BTC_SPY_data;
+var i = 1;
+d3.csv("BTC-USD-SPY-daily-prices.csv", function(d) {
 	    d.Date = d3.timeParse("%Y-%m-%d")(d.Date);
       //console.log(d.Date)
 	    d.BTC_Close = +d.BTC_Close;
       return d;
 	  }).then(function(data) {
     loadScene1(data);
+    console.log("data: ", i++, data);  
   });
 
 // Scene 1
