@@ -11,7 +11,10 @@
       <a href="#" id="scene3" class="step-link">Scene 3</a>
     </div>
 
-<div id="graph">
+<div id="graph" style = "float:left">
+</div>
+
+<div id="details" style = "float:right">
 </div>
 
 </body>
@@ -24,7 +27,7 @@ var margin = {top: 10, right: 30, bottom: 30, left: 60},
     height = 400 - margin.top - margin.bottom;
 
 
-// Attach to the SVG
+// Attach to the SVG to the graph div
 var svg = d3.select("#graph")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -33,6 +36,8 @@ var svg = d3.select("#graph")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 
+// Make a variable for the text details
+var div_details = document.getElementById('details');
 
 // Load the data
 var BTC_SPY_data;
@@ -98,8 +103,50 @@ function loadScene1(data) {
         .x(function(d) { return x(d.Date) })
         .y(function(d) { return y(d.BTC_Close) })
       );
+
+  // Add the detail text
+  div_details.innerHTML = "<p>This chart shows the daily closing price of BTC-USD (Bitcoin in US Dollars).";
+  div_details.innerHTML += "<p>Bitcoin is the world’s first decentralized cryptocurrency – a type of digital asset that uses public-key cryptography to record, sign and send transactions over the Bitcoin blockchain.";
+  div_details.innerHTML += "<p>The chart is from Feb 2018 to May 21.";
+  div_details.innerHTML += "<p>You can add the daily volume to the chart by clicking here: <button onclick='addScene1Volume(BTC_SPY_data)'>Add!</button>";
 };
 
+function addScene1Volume(data) {
+  // add volume bars under the price if selected
+
+  // setup
+  const yMinVolume = d3.min(data, d => {
+    return Math.min(d['BTC_Volume']);
+  });
+  const yMaxVolume = d3.max(data, d => {
+    return Math.max(d['BTC_Volume']);
+  });
+  const yVolumeScale = d3
+    .scaleLinear()
+    .domain([yMinVolume, yMaxVolume])
+    .range([height, 0]);
+
+  // add to chart
+  svg.selectAll().data(data).enter().append('rect')
+    .attr('x', d => {
+      return xScale(d['Date']);
+    })
+    .attr('y', d => {
+      return yVolumeScale(d['BTC_Volume']);
+    })
+    .attr('fill', (d, i) => {
+      if (i === 0) {
+        return '#03a678';
+      } else {
+        return data[i - 1].close > d.close ? '#c0392b' : '#03a678';
+      }
+    })
+    .attr('width', 1)
+    .attr('height', d => {
+      return height - yVolumeScale(d['BTC_Volume']);
+    });
+
+  };
 
 </script>
 </html>
