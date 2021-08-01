@@ -39,7 +39,7 @@ d3.csv("BTC-USD-SPY-daily-prices.csv", function(error, data) {
 	  if (error) throw error;
 
 	  data.forEach(function(d) {
-	    d.Date = +d3.timeParse("%Y-%m-%d")(d.Date);
+	    d.Date = d3.timeParse("%Y-%m-%d")(d.Date);
       console.log(d.Date)
 	    d.BTC_Close = +d.BTC_Close;
 	  })
