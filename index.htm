@@ -1,0 +1,79 @@
+<html>
+<title>D3.js Visualization - Roger Dellaca</title>
+<script src='https://d3js.org/d3.v5.min.js'></script>
+<body>
+ <div id="top">
+    <h1>Bitcoin Investment Dynamics</h1>
+    <h2></h2>
+    <div id="nav">
+      <a href="#" id="scene1" class="step-link active">Scene 1</a>
+      <a href="#" id="scene2" class="step-link">Scene 2</a>
+      <a href="#" id="scene3" class="step-link">Scene 3</a>
+    </div>
+
+<div id="graph">
+</div>
+
+</body>
+
+<script>
+
+//size parameters
+var margin = {top: 10, right: 30, bottom: 30, left: 60},
+    width = 460 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
+
+
+// Attach to the SVG
+var svg = d3.select("#graph")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+
+
+// Load the data
+d3.csv("BTC-USD-SPY-daily-prices.csv", function(error, data) {
+	  if (error) throw error;
+
+	  data.forEach(function(d) {
+	    d.Date = +d3.timeParse("%Y-%m-%d")(d.Date);
+	    d.BTC_Close = +d.BTC_Close;
+      loadScene1();
+	  })
+  });
+
+// Scene 1
+function loadScene1() {
+  // Add X axis --> date format
+    var x = d3.scaleTime()
+      .domain(d3.extent(data, function(d) { return d.Date; }))
+      .range([ 0, width ]);
+    svg.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x));
+
+// Add Y axis
+    var y = d3.scaleLinear()
+      .domain([0, d3.max(data, function(d) { return +d.BTC_Close; })])
+      .range([ height, 0 ]);
+    svg.append("g")
+      .call(d3.axisLeft(y));
+
+    // Add the line
+    svg.append("path")
+      .datum(data)
+      .attr("fill", "none")
+      .attr("stroke", "steelblue")
+      .attr("stroke-width", 1.5)
+      .attr("d", d3.line()
+        .x(function(d) { return x(d.Date) })
+        .y(function(d) { return y(d.BTC_Close) })
+      );
+};
+
+
+</script>
+</html>
