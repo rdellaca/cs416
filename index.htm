@@ -63,13 +63,13 @@ function loadScene1(data) {
       .range([ 0, width ]);
     svg.append("g")
       .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x));
+      .call(d3.axisBottom(x))
+      .tickFormat(d3.timeFormat("%b %y")));
 
   // text label for the X axis
      svg.append("text")
          .attr("transform",
-               "translate(" + (width/2) + " ," +
-                          (height + margin.top + 20) + ")")
+               "translate(" + (width/2) + " ," + (height + margin.bottom) + ")")
          .style("text-anchor", "middle")
          .text("Date");
 
