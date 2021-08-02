@@ -307,11 +307,11 @@ function changePeriod() {
   svg2.selectAll("path").remove();
 
   var x = d3.scaleTime()
-    .domain(d3.extent(data, function(d) { return d.Date; }))
+    .domain(d3.extent(BTC_SPY_data, function(d) { return d.Date; }))
     .range([ 0, width ]);
 
     var y = d3.scaleLinear()
-      .domain([d3.min(data, function(d) { return +d.Pctchange_BTC_1day; }), d3.max(data, function(d) { return +d.Pctchange_BTC_1day; })])
+      .domain([d3.min(BTC_SPY_data, function(d) { return +d.Pctchange_BTC_1day; }), d3.max(data, function(d) { return +d.Pctchange_BTC_1day; })])
       .range([ height, 0 ]);
 
 if (selectedValue == 1) {
