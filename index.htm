@@ -87,8 +87,8 @@ var svg3 = graph.append("svg")
     .append("g")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
-svg2.attr("visibility","hidden");
-svg3.attr("visibility","hidden");
+svg2.attr("display","none");
+svg3.attr("display","none");
 
   svg.attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -116,6 +116,7 @@ d3.csv("BTC-USD-SPY-daily-prices.csv", function(d) {
     loadScene1(BTC_SPY_data);
     loadScene2(BTC_SPY_data);
     loadScene3(BTC_SPY_data);
+    setDetails(1);
   });
 
 // Scene 1
@@ -163,11 +164,6 @@ function loadScene1(data) {
         .y(function(d) { return y(d.BTC_Close) })
       );
 
-  // Add the detail text
-  div_details.innerHTML = "<p>This chart shows the daily closing price of BTC-USD (Bitcoin in US Dollars).";
-  div_details.innerHTML += "<p>Bitcoin is the world’s first decentralized cryptocurrency – a type of digital asset that uses public-key cryptography to record, sign and send transactions over the Bitcoin blockchain.";
-  div_details.innerHTML += "<p>The chart is from Feb 2018 to May 21.";
-  div_details.innerHTML += "<p>You can add the daily volume to the chart by clicking here: <button onclick='addScene1Volume(BTC_SPY_data)'>Add!</button>";
 };
 
 function addScene1Volume(data) {
@@ -262,6 +258,17 @@ function loadScene2(data) {
             .y(function(d) { return y(d.Pctchange_SPY_1day) })
           );
 
+
+};
+
+function setDetails(sceneNum) {
+  // Add the detail text
+if (sceneNum==1) {
+  div_details.innerHTML = "<p>This chart shows the daily closing price of BTC-USD (Bitcoin in US Dollars).";
+  div_details.innerHTML += "<p>Bitcoin is the world’s first decentralized cryptocurrency – a type of digital asset that uses public-key cryptography to record, sign and send transactions over the Bitcoin blockchain.";
+  div_details.innerHTML += "<p>The chart is from Feb 2018 to May 21.";
+  div_details.innerHTML += "<p>You can add the daily volume to the chart by clicking here: <button onclick='addScene1Volume(BTC_SPY_data)'>Add!</button>";
+} else if (sceneNum==2) {
   // Add the detail text
   div_details.innerHTML = "<p>This chart shows the Percent change in Bitcoin (BTC) versus an S&P 500 index fund (SPY).";
   div_details.innerHTML += "<p>This compare the volatility in price of these 2 assets.";
@@ -269,6 +276,9 @@ function loadScene2(data) {
   div_details.innerHTML += "<p>By default, it is a 1-day chane in price. You can select an alternate period here: ";
   div_details.innerHTML += "<select id='scene2Period' onchange='changePeriod();'><option value='1'>1 Day</option><option value='2'>1 Week</option><option value='3'>4 Weeks</option></select>";
 
+} else {
+  //
+}
 };
 
 function changePeriod() {
@@ -355,18 +365,18 @@ function changeScene(sceneNum) {
   if (sceneNum != activeScene) {
     // switch scenes
     if (activeScene == 1) {
-      svg.attr("visibility","hidden")
+      svg.attr("display","none")
     } else if (activeScene == 2) {
-      svg2.attr("visibility","hidden")
+      svg2.attr("display","none")
     } else {
-      svg3.attr("visibility","hidden")
+      svg3.attr("display","none")
     }
     if (sceneNum == 1) {
-      svg.attr("visibility","visibile")
+      svg.attr("display","inline")
     } else if (sceneNum == 2) {
-      svg2.attr("visibility","visibile")
+      svg2.attr("display","inline")
     } else {
-      svg3.attr("visibility","visibile")
+      svg2.attr("display","inline")
     }
     activeScene = sceneNum;
   }
