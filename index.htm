@@ -306,6 +306,14 @@ function changePeriod() {
   console.log("selected value: ", selectedValue);
   svg2.selectAll("path").remove();
 
+  var x = d3.scaleTime()
+    .domain(d3.extent(data, function(d) { return d.Date; }))
+    .range([ 0, width ]);
+
+    var y = d3.scaleLinear()
+      .domain([d3.min(data, function(d) { return +d.Pctchange_BTC_1day; }), d3.max(data, function(d) { return +d.Pctchange_BTC_1day; })])
+      .range([ height, 0 ]);
+
 if (selectedValue == 1) {
   // Add the line
     svg2.append("path")
