@@ -127,7 +127,7 @@ function addScene1Volume(data) {
     .range([height, 0]);
 
   // add to chart
-  svg.selectAll().data(data).enter().append('rect')
+  svg.selectAll('rect').data(data).enter().append('rect')
     .attr('x', function(d) { return x(d.Date) })
     .attr('y', function(d) { return yVolumeScale(d['BTC_Volume']) })
     .attr('fill', (d, i) => {
