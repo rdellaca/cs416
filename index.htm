@@ -12,7 +12,7 @@
       <a href="#" id="scene3" class="step-link">Scene 3</a>
     </div>
 
-<div id="graph" style = "float:left;">
+<div id="graph" style = "float:left; witdh:500px;">
 </div>
 
 <div id="details" style = "float:right;">
@@ -136,10 +136,8 @@ function addScene1Volume(data) {
     .attr('x', function(d) { return x(d.Date) })
     .attr('y', function(d) { return yVolumeScale(d['BTC_Volume']) })
     .attr('fill', (d, i) => {
-      if (i === 0) {
-        return '#03a678';
-      } else {
-        return data[i - 1].close > d.close ? '#c0392b' : '#03a678';
+      if (i === 0) { return '#03a678';
+         } else {  return data[i - 1].close > d.close ? '#c0392b' : '#03a678';
       }
     })
     .attr('width', 1)
