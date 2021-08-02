@@ -116,6 +116,10 @@ function addScene1Volume(data) {
   // add volume bars under the price if selected
 
   // setup
+  var x = d3.scaleTime()
+    .domain(d3.extent(data, function(d) { return d.Date; }))
+    .range([ 0, width ]);
+
   const yMinVolume = d3.min(data, d => {
     return Math.min(d['BTC_Volume']);
   });
