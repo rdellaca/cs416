@@ -128,8 +128,8 @@ function addScene1Volume(data) {
 
   // add to chart
   svg.selectAll().data(data).enter().append('rect')
-    .x(function(d) { return x(d.Date) })
-    .y(function(d) { return yVolumeScale(d['BTC_Volume']) })
+    .attr("x", function(d) { return x(d.Date) })
+    .attr("y", function(d) { return yVolumeScale(d['BTC_Volume']) })
     .attr('fill', (d, i) => {
       if (i === 0) {
         return '#03a678';
