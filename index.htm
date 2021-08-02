@@ -30,18 +30,6 @@ a.scene-link:hover, a.selected {
   float: left;
 }
 
-#graph1{
-  display: block;
-  overflow: hidden;
-}
-#graph2{
-  display: none;
-  overflow: hidden;
-}
-#graph3{
-  display: none;
-  overflow: hidden;
-}
 
 #details{
   width: 480px;
@@ -114,6 +102,8 @@ var svg3 = graph3.append("svg")
       .attr("height", height + margin.top + margin.bottom)
       svg3.attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
+graph2.attr("display", "none");
+graph3.attr("display", "none");
 
 // Make a variable for the text details
 var div_details = document.getElementById('details');
