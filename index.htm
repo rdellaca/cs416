@@ -289,6 +289,7 @@ if (sceneNum==1) {
   // Add the detail text
   div_details.innerHTML = "<p>This chart shows the Percent change in Bitcoin (BTC) versus an S&P 500 index fund (SPY).";
   div_details.innerHTML += "<p>This compare the volatility in price of these 2 assets.";
+  div_details.innerHTML += "<p>(BTC is in blue, and SPY is in red.)";
   div_details.innerHTML += "<p>The chart is from Feb 2018 to May 21.";
   div_details.innerHTML += "<p>By default, it is a 1-day chane in price. You can select an alternate period here: ";
   div_details.innerHTML += "<select id='scene2Period' onchange='changePeriod();'><option value='1'>1 Day</option><option value='2'>1 Week</option><option value='3'>4 Weeks</option></select>";
@@ -306,7 +307,7 @@ function changePeriod() {
 if (selectedValue == 1) {
   // Add the line
     svg2.append("path")
-      .datum(data)
+      .datum(BTC_SPY_data)
       .attr("fill", "none")
       .attr("stroke", "steelblue")
       .attr("stroke-width", 1.5)
@@ -317,7 +318,7 @@ if (selectedValue == 1) {
 
       // Add the 2nd line
         svg2.append("path")
-          .datum(data)
+          .datum(BTC_SPY_data)
           .attr("fill", "none")
           .attr("stroke", "red")
           .attr("stroke-width", 1.5)
@@ -328,7 +329,7 @@ if (selectedValue == 1) {
         } else if (selectedValue == 2) {
           // Add the line
             svg2.append("path")
-              .datum(data)
+              .datum(BTC_SPY_data)
               .attr("fill", "none")
               .attr("stroke", "steelblue")
               .attr("stroke-width", 1.5)
@@ -339,7 +340,7 @@ if (selectedValue == 1) {
 
               // Add the 2nd line
                 svg2.append("path")
-                  .datum(data)
+                  .datum(BTC_SPY_data)
                   .attr("fill", "none")
                   .attr("stroke", "red")
                   .attr("stroke-width", 1.5)
@@ -350,7 +351,7 @@ if (selectedValue == 1) {
           } else if (selectedValue == 3) {
             // Add the line
               svg2.append("path")
-                .datum(data)
+                .datum(BTC_SPY_data)
                 .attr("fill", "none")
                 .attr("stroke", "steelblue")
                 .attr("stroke-width", 1.5)
@@ -361,7 +362,7 @@ if (selectedValue == 1) {
 
                 // Add the 2nd line
                   svg2.append("path")
-                    .datum(data)
+                    .datum(BTC_SPY_data)
                     .attr("fill", "none")
                     .attr("stroke", "red")
                     .attr("stroke-width", 1.5)
