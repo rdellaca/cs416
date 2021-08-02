@@ -389,11 +389,11 @@ function loadScene3(data) {
       var y = d3.scaleLinear()
         .domain([d3.min(data, function(d) { return +d.Pctchange_BTC_4weeks; }), d3.max(data, function(d) { return +d.Pctchange_BTC_4weeks; })])
         .range([ height, 0 ]);
-      svg2.append("g")
+      svg3.append("g")
         .call(d3.axisLeft(y));
 
     // text label for the Y axis
-        svg2.append("text")
+        svg3.append("text")
             .attr("transform", "rotate(-90)")
             .attr("y", 0 - margin.left)
             .attr("x",0 - (height / 2))
