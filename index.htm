@@ -4,7 +4,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 
 <style>
-/* Style for scene links */
+/* Style for scene links
 a.scene-link {
   padding: 5px;
   background-color: #444;
@@ -15,6 +15,7 @@ a.scene-link {
 a.scene-link:hover, a.selected {
   color: #ddd;
 }
+*/
 
 /* divs */
 #top{
@@ -58,8 +59,9 @@ a.scene-link:hover, a.selected {
 </body>
 
 <script>
+// data placeholder
+var BTC_SPY_data;
 // track which scene is active
-
 var activeScene = 1;
 
 //size parameters
@@ -69,20 +71,17 @@ var margin = {top: 10, right: 30, bottom: 30, left: 60},
 
 
 // Attach to the SVG to the graph div
-var svg = d3.select("#graph")
-  .append("svg")
-    .attr("width", width + margin.left + margin.right)
+var graph = d3.select("#graph");
+var svg = graph.append("svg");
+
+  svg.attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");
 
 // Make a variable for the text details
 var div_details = document.getElementById('details');
 
-// Load the data
-var BTC_SPY_data;
 
+// Load the data
 d3.csv("BTC-USD-SPY-daily-prices.csv", function(d) {
 	    d.Date = d3.timeParse("%Y-%m-%d")(d.Date); // store as Date object
 	    d.BTC_Close = +d.BTC_Close;
@@ -103,6 +102,13 @@ d3.csv("BTC-USD-SPY-daily-prices.csv", function(d) {
 
 // Scene 1
 function loadScene1(data) {
+  // remove previous data
+  svg.selectAll("g").remove();
+  // innder container
+  svg.append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+
   // Add X axis --> date format
     var x = d3.scaleTime()
       .domain(d3.extent(data, function(d) { return d.Date; }))
@@ -191,6 +197,13 @@ function addScene1Volume(data) {
 
 // Scene 2
 function loadScene2(data) {
+  // remove previous data
+  svg.selectAll("g").remove();
+  // innder container
+  svg.append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+
   // Add X axis --> date format
     var x = d3.scaleTime()
       .domain(d3.extent(data, function(d) { return d.Date; }))
