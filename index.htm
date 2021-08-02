@@ -72,13 +72,19 @@ var margin = {top: 10, right: 30, bottom: 30, left: 60},
 
 // Attach to the SVG to the graph div
 var graph = d3.select("#graph");
-var svg = graph.append("svg").append("g")
+var svg = graph.append("svg").
+     .attr("viewbox", "0 0 500 500")
+     .append("g")
+     .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+var svg2 = graph.append("svg")
+    .attr("viewbox", "0 0 500 500")
+    .append("g")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
-var svg2 = graph.append("svg").append("g")
-    .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");
-var svg3 = graph.append("svg").append("g")
+var svg3 = graph.append("svg")
+    .attr("viewbox", "0 0 500 500")
+    .append("g")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 svg2.attr("visibility","hidden");
