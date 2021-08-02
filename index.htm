@@ -2,21 +2,58 @@
 <title>D3.js Visualization - Roger Dellaca</title>
 <script src='https://d3js.org/d3.v5.min.js'></script>
 
+
+<style>
+/* Style for scene links */
+a.scene-link {
+  padding: 5px;
+  background-color: #444;
+  color: #666;
+  text-decoration: none;
+}
+
+a.step-link:hover, a.active {
+  color: #ddd;
+}
+
+/* divs */
+#top{
+  margin: auto;
+  padding-top: 20px;
+  width: 980px;
+}
+
+#graph{
+  width: 500px;
+  float: left;
+}
+
+#details{
+  width: 480px;
+  float:right;
+}
+
+</style>
+
+
+
 <body>
  <div id="top">
     <h1>Bitcoin Investment Dynamics</h1>
     <h2></h2>
     <div id="nav">
-      <a href="#" id="scene1" class="step-link active">Scene 1</a>
-      <a href="#" id="scene2" class="step-link">Scene 2</a>
-      <a href="#" id="scene3" class="step-link">Scene 3</a>
+      <a href="#" id="scene1" class="scene-link active">Scene 1</a>
+      <a href="#" id="scene2" class="scene-link">Scene 2</a>
+      <a href="#" id="scene3" class="scene-link">Scene 3</a>
     </div>
 
-<div id="graph" style = "float:left; witdh:500px;">
+<div id="graph">
 </div>
 
-<div id="details" style = "float:right;">
+<div id="details">
 </div>
+
+
 
 </body>
 
@@ -129,7 +166,7 @@ function addScene1Volume(data) {
   const yVolumeScale = d3
     .scaleLinear()
     .domain([yMinVolume, yMaxVolume])
-    .range([height, 0]);
+    .range([height/4, 0]);
 
   // add to chart
   svg.selectAll('rect').data(data).enter().append('rect')
