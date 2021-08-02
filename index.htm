@@ -401,7 +401,7 @@ function changePeriod2() {
       // Add dots
     if (selectedValue == 1) {
       svg3.append('g')
-        .selectAll("dot")
+        .selectAll("circle")
         .data(BTC_SPY_data)
         .enter()
         .append("circle")
@@ -411,7 +411,7 @@ function changePeriod2() {
           .style("fill", "#69b3a2")
       } else if (selectedValue == 2) {
         svg3.append('g')
-          .selectAll("dot")
+          .selectAll("circle")
           .data(BTC_SPY_data)
           .enter()
           .append("circle")
@@ -421,7 +421,7 @@ function changePeriod2() {
             .style("fill", "#69b3a2")
       } else {
         svg3.append('g')
-          .selectAll("dot")
+          .selectAll("circle")
           .data(BTC_SPY_data)
           .enter()
           .append("circle")
@@ -470,7 +470,7 @@ function loadScene3(data) {
 
   // Add dots
   svg3.append('g')
-    .selectAll("dot")
+    .selectAll("circle")
     .data(BTC_SPY_data)
     .enter()
     .append("circle")
