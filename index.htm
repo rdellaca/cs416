@@ -103,7 +103,7 @@ d3.csv("BTC-USD-SPY-daily-prices.csv", function(d) {
 // Scene 1
 function loadScene1(data) {
   // remove previous data
-  svg.selectAll("g").remove();
+  svg.selectAll().remove();
   // innder container
   svg.append("g")
     .attr("transform",
@@ -198,7 +198,7 @@ function addScene1Volume(data) {
 // Scene 2
 function loadScene2(data) {
   // remove previous data
-  svg.selectAll("g").remove();
+  svg.selectAll().remove();
   // innder container
   svg.append("g")
     .attr("transform",
