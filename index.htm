@@ -234,7 +234,7 @@ function loadScene2(data) {
 
 // Add Y axis
     var y = d3.scaleLinear()
-      .domain([0, d3.max(data, function(d) { return +d.Pctchange_BTC_1day; })])
+      .domain([d3.min(data, function(d) { return +d.Pctchange_BTC_1day; }), d3.max(data, function(d) { return +d.Pctchange_BTC_1day; })])
       .range([ height, 0 ]);
     svg2.append("g")
       .call(d3.axisLeft(y));
