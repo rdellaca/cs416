@@ -399,10 +399,10 @@ function changePeriod2() {
   var selectedValue = selectBox.options[selectBox.selectedIndex].value;
 
   var y = d3.scaleLinear()
-    .domain([d3.min(data, function(d) { return +d.Pctchange_BTC_4weeks; }), d3.max(data, function(d) { return +d.Pctchange_BTC_4weeks; })])
+    .domain([d3.min(BTC_SPY_data, function(d) { return +d.Pctchange_BTC_4weeks; }), d3.max(BTC_SPY_data, function(d) { return +d.Pctchange_BTC_4weeks; })])
     .range([ height, 0 ]);
     var x = d3.scaleLinear()
-      .domain([d3.min(data, function(d) { return +d.Pctchange_SPY_4weeks; }), d3.max(data, function(d) { return +d.Pctchange_SPY_4weeks; })])
+      .domain([d3.min(BTC_SPY_data, function(d) { return +d.Pctchange_SPY_4weeks; }), d3.max(BTC_SPY_data, function(d) { return +d.Pctchange_SPY_4weeks; })])
       .range([ 0, width ]);
       svg3.selectAll("circle").remove();
 
