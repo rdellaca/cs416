@@ -191,9 +191,96 @@ function addScene1Volume(data) {
 
 // Scene 2
 function loadScene2(data) {
+  // Add X axis --> date format
+    var x = d3.scaleTime()
+      .domain(d3.extent(data, function(d) { return d.Date; }))
+      .range([ 0, width ]);
+    svg.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x).tickFormat(d3.timeFormat("%b,%y")));
+
+  // text label for the X axis
+     svg.append("text")
+         .attr("transform",
+               "translate(" + (width/2) + " ," + (height + margin.bottom) + ")")
+         .style("text-anchor", "middle")
+         .text("Date");
+
+// Add Y axis
+    var y = d3.scaleLinear()
+      .domain([0, d3.max(data, function(d) { return +d.Pctchange_BTC_1day; })])
+      .range([ height, 0 ]);
+    svg.append("g")
+      .call(d3.axisLeft(y));
+
+  // text label for the Y axis
+      svg.append("text")
+          .attr("transform", "rotate(-90)")
+          .attr("y", 0 - margin.left)
+          .attr("x",0 - (height / 2))
+          .attr("dy", "1em")
+          .style("text-anchor", "middle")
+          .text("Pct change");
+
+  // Add the line
+    svg.append("path")
+      .datum(data)
+      .attr("fill", "none")
+      .attr("stroke", "steelblue")
+      .attr("stroke-width", 1.5)
+      .attr("d", d3.line()
+        .x(function(d) { return x(d.Date) })
+        .y(function(d) { return y(d.Pctchange_BTC_1day) })
+      );
+
+      // Add the 2nd line
+        svg.append("path")
+          .datum(data)
+          .attr("fill", "none")
+          .attr("stroke", "red")
+          .attr("stroke-width", 1.5)
+          .attr("d", d3.line()
+            .x(function(d) { return x(d.Date) })
+            .y(function(d) { return y(d.Pctchange_SPY_1day) })
+          );
+
+  // Add the detail text
+  div_details.innerHTML = "<p>This chart shows the Percent change in Bitcoin (BTC) versus an S&P 500 index fund (SPY).";
+  div_details.innerHTML += "<p>This compare the volatility in price of these 2 assets.";
+  div_details.innerHTML += "<p>The chart is from Feb 2018 to May 21.";
+  div_details.innerHTML += "<p>By default, it is a 1-day chane in price. You can select an alternate period here: ";
+  div_details.innerHTML += "<select id="scene2Period" onchange="changePeriod();"><option value='1 Day'>1</option><option value='1 Week'>2</option><option value='4 Weeks'>3</option></select>";
 
 };
 
+function changePeriod() {
+  var selectBox = document.getElementById("scene2Period");
+  var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+  svg.selectAll("path").remove();
+
+  // Add the line
+    svg.append("path")
+      .datum(data)
+      .attr("fill", "none")
+      .attr("stroke", "steelblue")
+      .attr("stroke-width", 1.5)
+      .attr("d", d3.line()
+        .x(function(d) { return x(d.Date) })
+        .y(function(d) { return y(d.Pctchange_BTC_1day) })
+      );
+
+      // Add the 2nd line
+        svg.append("path")
+          .datum(data)
+          .attr("fill", "none")
+          .attr("stroke", "red")
+          .attr("stroke-width", 1.5)
+          .attr("d", d3.line()
+            .x(function(d) { return x(d.Date) })
+            .y(function(d) { return y(d.Pctchange_SPY_1day) })
+          );
+
+}
 // Scene 3
 function loadScene3(data) {
 
