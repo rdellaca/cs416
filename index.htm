@@ -296,6 +296,8 @@ if (sceneNum==1) {
   div_details.innerHTML = "<p>This is a scatter of Percent change in Bitcoin (BTC) versus an S&P 500 index fund (SPY).";
   div_details.innerHTML += "<p>Also to compare the volatility in price of these 2 assets.";
   div_details.innerHTML += "<p>The chart is from Feb 2018 to May 21.";
+  div_details.innerHTML += "<p>By default, it is a 1-day chane in price. You can select an alternate period here: ";
+  div_details.innerHTML += "<select id='scene3Period' onchange='changePeriod2();'><option value='1'>1 Day</option><option value='2'>1 Week</option><option value='3'>4 Weeks</option></select>";
 
 }
 };
@@ -383,6 +385,55 @@ if (selectedValue == 1) {
           }
 
 }
+
+function changePeriod2() {
+  var selectBox = document.getElementById("scene3Period");
+  var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+
+  var y = d3.scaleLinear()
+    .domain([d3.min(data, function(d) { return +d.Pctchange_BTC_4weeks; }), d3.max(data, function(d) { return +d.Pctchange_BTC_4weeks; })])
+    .range([ height, 0 ]);
+    var x = d3.scaleLinear()
+      .domain([d3.min(data, function(d) { return +d.Pctchange_SPY_4weeks; }), d3.max(data, function(d) { return +d.Pctchange_SPY_4weeks; })])
+      .range([ 0, width ]);
+      svg3.selectAll("circle").remove();
+
+      // Add dots
+    if (selectedValue == 1) {
+      svg3.append('g')
+        .selectAll("dot")
+        .data(BTC_SPY_data)
+        .enter()
+        .append("circle")
+          .attr("cx", function (d) { return x(d.Pctchange_BTC_1day); } )
+          .attr("cy", function (d) { return y(d.Pctchange_SPY_1day); } )
+          .attr("r", 1.5)
+          .style("fill", "#69b3a2")
+      } else if (selectedValue == 2) {
+        svg3.append('g')
+          .selectAll("dot")
+          .data(BTC_SPY_data)
+          .enter()
+          .append("circle")
+            .attr("cx", function (d) { return x(d.Pctchange_BTC_1week); } )
+            .attr("cy", function (d) { return y(d.Pctchange_SPY_1week); } )
+            .attr("r", 1.5)
+            .style("fill", "#69b3a2")
+      } else {
+        svg3.append('g')
+          .selectAll("dot")
+          .data(BTC_SPY_data)
+          .enter()
+          .append("circle")
+            .attr("cx", function (d) { return x(d.Pctchange_BTC_4weeks); } )
+            .attr("cy", function (d) { return y(d.Pctchange_SPY_4weeks); } )
+            .attr("r", 1.5)
+            .style("fill", "#69b3a2")
+
+      }
+
+};
+
 // Scene 3
 function loadScene3(data) {
   // Add Y axis
