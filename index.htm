@@ -26,14 +26,18 @@ a.scene-link:hover, a.selected {
 
 #graph{
   width: 500px;
-  height: 1500px;
   float: left;
+  overflow: hidden;
 }
-
+#offscreen{
+  margin-left: 100%;
+  overflow: hidden;
+}
 
 #details{
   width: 480px;
   float:right;
+  overflow: hidden;
 }
 
 </style>
@@ -53,12 +57,13 @@ a.scene-link:hover, a.selected {
 <div id="graph">
   <div id="graph1">
   </div>
+</div>
+<div id="offscreen">
   <div id="graph2">
   </div>
   <div id="graph3">
   </div>
 </div>
-
 <div id="details">
 </div>
 
@@ -79,9 +84,10 @@ var margin = {top: 10, right: 30, bottom: 30, left: 60},
 
 
 // Attach to the SVG to the graph div
-var graph1 = d3.select("#graph1");
-var graph2 = d3.select("#graph2");
-var graph3 = d3.select("#graph3");
+var graph1 = document.getElementById("#graph1");
+var graph2 = document.getElementById("#graph2");
+var graph3 = document.getElementById("#graph3");
+var offscreen = document.getElementById("offscreen");
 
 var svg = graph1.append("svg")
   svg.append("g")
@@ -102,8 +108,6 @@ var svg3 = graph3.append("svg")
       .attr("height", height + margin.top + margin.bottom)
       svg3.attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
-graph2.attr("display", "none");
-graph3.attr("display", "none");
 
 // Make a variable for the text details
 var div_details = document.getElementById('details');
@@ -378,19 +382,19 @@ function changeScene(sceneNum) {
     console.log("changing scene to ", sceneNum);
     // hide active scene
     if (activeScene == 1) {
-      graph1.attr("display","none")
+      offscreen.appendChild(graph1)
     } else if (activeScene == 2) {
-      graph2.attr("display","none")
+      offscreen.appendChild(graph2)
     } else {
-      graph3.attr("display","none")
+      offscreen.appendChild(graph2)
     }
     // display new scene
     if (sceneNum == 1) {
-      graph1.attr("display","block")
+      graph.appendChild(graph1)
     } else if (sceneNum == 2) {
-      graph2.attr("display","block")
+      graph.appendChild(graph2)
     } else {
-      graph3.attr("display","block")
+      graph.appendChild(graph3)
     }
     setDetails(sceneNum);
     activeScene = sceneNum;
