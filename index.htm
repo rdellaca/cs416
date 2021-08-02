@@ -72,7 +72,17 @@ var margin = {top: 10, right: 30, bottom: 30, left: 60},
 
 // Attach to the SVG to the graph div
 var graph = d3.select("#graph");
-var svg = graph.append("svg");
+var svg = graph.append("svg").append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+var svg2 = graph.append("svg").append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+var svg3 = graph.append("svg").append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+svg2.attr("visibility","hidden");
+svg3.attr("visibility","hidden");
 
   svg.attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -98,16 +108,12 @@ d3.csv("BTC-USD-SPY-daily-prices.csv", function(d) {
 	  }).then(function(data) {
     BTC_SPY_data = data;
     loadScene1(BTC_SPY_data);
+    loadScene2(BTC_SPY_data);
+    loadScene3(BTC_SPY_data);
   });
 
 // Scene 1
 function loadScene1(data) {
-  // remove previous data
-  svg.selectAll().remove();
-  // innder container
-  svg.append("g")
-    .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");
 
   // Add X axis --> date format
     var x = d3.scaleTime()
@@ -197,23 +203,16 @@ function addScene1Volume(data) {
 
 // Scene 2
 function loadScene2(data) {
-  // remove previous data
-  svg.selectAll().remove();
-  // innder container
-  svg.append("g")
-    .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");
-
   // Add X axis --> date format
     var x = d3.scaleTime()
       .domain(d3.extent(data, function(d) { return d.Date; }))
       .range([ 0, width ]);
-    svg.append("g")
+    svg2.append("g")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x).tickFormat(d3.timeFormat("%b,%y")));
 
   // text label for the X axis
-     svg.append("text")
+     svg2.append("text")
          .attr("transform",
                "translate(" + (width/2) + " ," + (height + margin.bottom) + ")")
          .style("text-anchor", "middle")
@@ -223,11 +222,11 @@ function loadScene2(data) {
     var y = d3.scaleLinear()
       .domain([0, d3.max(data, function(d) { return +d.Pctchange_BTC_1day; })])
       .range([ height, 0 ]);
-    svg.append("g")
+    svg2.append("g")
       .call(d3.axisLeft(y));
 
   // text label for the Y axis
-      svg.append("text")
+      svg2.append("text")
           .attr("transform", "rotate(-90)")
           .attr("y", 0)
           .attr("x",0 - (height / 2))
@@ -236,7 +235,7 @@ function loadScene2(data) {
           .text("Pct change");
 
   // Add the line
-    svg.append("path")
+    svg2.append("path")
       .datum(data)
       .attr("fill", "none")
       .attr("stroke", "steelblue")
@@ -247,7 +246,7 @@ function loadScene2(data) {
       );
 
       // Add the 2nd line
-        svg.append("path")
+        svg2.append("path")
           .datum(data)
           .attr("fill", "none")
           .attr("stroke", "red")
@@ -273,7 +272,7 @@ function changePeriod() {
 
 if (selectedValue == 1) {
   // Add the line
-    svg.append("path")
+    svg2.append("path")
       .datum(data)
       .attr("fill", "none")
       .attr("stroke", "steelblue")
@@ -284,7 +283,7 @@ if (selectedValue == 1) {
       );
 
       // Add the 2nd line
-        svg.append("path")
+        svg2.append("path")
           .datum(data)
           .attr("fill", "none")
           .attr("stroke", "red")
@@ -295,7 +294,7 @@ if (selectedValue == 1) {
           );
         } else if (selectedValue == 2) {
           // Add the line
-            svg.append("path")
+            svg2.append("path")
               .datum(data)
               .attr("fill", "none")
               .attr("stroke", "steelblue")
@@ -306,7 +305,7 @@ if (selectedValue == 1) {
               );
 
               // Add the 2nd line
-                svg.append("path")
+                svg2.append("path")
                   .datum(data)
                   .attr("fill", "none")
                   .attr("stroke", "red")
@@ -317,7 +316,7 @@ if (selectedValue == 1) {
                   );
           } else if (selectedValue == 3) {
             // Add the line
-              svg.append("path")
+              svg2.append("path")
                 .datum(data)
                 .attr("fill", "none")
                 .attr("stroke", "steelblue")
@@ -328,7 +327,7 @@ if (selectedValue == 1) {
                 );
 
                 // Add the 2nd line
-                  svg.append("path")
+                  svg2.append("path")
                     .datum(data)
                     .attr("fill", "none")
                     .attr("stroke", "red")
@@ -349,12 +348,19 @@ function loadScene3(data) {
 function changeScene(sceneNum) {
   if (sceneNum != activeScene) {
     // switch scenes
-    if (sceneNum == 1) {
-      loadScene1(BTC_SPY_data);
-    } else if (sceneNum == 2) {
-      loadScene2(BTC_SPY_data);
+    if (activeScene == 1) {
+      svg.attr("visibility","hidden")
+    } else if (activeScene == 2) {
+      svg2.attr("visibility","hidden")
     } else {
-      loadScene3(BTC_SPY_data);
+      svg3.attr("visibility","hidden")
+    }
+    if (sceneNum == 1) {
+      svg.attr("visibility","visibile")
+    } else if (sceneNum == 2) {
+      svg2.attr("visibility","visibile")
+    } else {
+      svg3.attr("visibility","visibile")
     }
     activeScene = sceneNum;
   }
