@@ -30,7 +30,7 @@ a.scene-link:hover, a.selected {
 }
 
 #graph1{
-  display: inline;
+  display: block;
   overflow: hidden;
 }
 #graph2{
@@ -395,11 +395,11 @@ function changeScene(sceneNum) {
     }
     // display new scene
     if (sceneNum == 1) {
-      graph1.attr("display","inline")
+      graph1.attr("display","block")
     } else if (sceneNum == 2) {
-      graph2.attr("display","inline")
+      graph2.attr("display","block")
     } else {
-      graph3.attr("display","inline")
+      graph3.attr("display","block")
     }
     setDetails(sceneNum);
     activeScene = sceneNum;
