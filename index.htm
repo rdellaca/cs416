@@ -84,9 +84,9 @@ var margin = {top: 10, right: 30, bottom: 30, left: 60},
 
 
 // Attach to the SVG to the graph div
-var graph1 = document.getElementById("#graph1");
-var graph2 = document.getElementById("#graph2");
-var graph3 = document.getElementById("#graph3");
+var graph1 = d3.select("#graph1");
+var graph2 = d3.select("#graph2");
+var graph3 = d3.select("#graph3");
 var offscreen = document.getElementById("offscreen");
 
 var svg = graph1.append("svg")
