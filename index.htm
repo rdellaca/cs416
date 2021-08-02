@@ -271,6 +271,7 @@ function changePeriod() {
   var selectedValue = selectBox.options[selectBox.selectedIndex].value;
   svg.selectAll("path").remove();
 
+if (selectedValue == 1) {
   // Add the line
     svg.append("path")
       .datum(data)
@@ -292,6 +293,51 @@ function changePeriod() {
             .x(function(d) { return x(d.Date) })
             .y(function(d) { return y(d.Pctchange_SPY_1day) })
           );
+        } else if (selectedValue == 2) {
+          // Add the line
+            svg.append("path")
+              .datum(data)
+              .attr("fill", "none")
+              .attr("stroke", "steelblue")
+              .attr("stroke-width", 1.5)
+              .attr("d", d3.line()
+                .x(function(d) { return x(d.Date) })
+                .y(function(d) { return y(d.Pctchange_BTC_1week) })
+              );
+
+              // Add the 2nd line
+                svg.append("path")
+                  .datum(data)
+                  .attr("fill", "none")
+                  .attr("stroke", "red")
+                  .attr("stroke-width", 1.5)
+                  .attr("d", d3.line()
+                    .x(function(d) { return x(d.Date) })
+                    .y(function(d) { return y(d.Pctchange_SPY_1week) })
+                  );
+          } else if (selectedValue == 3) {
+            // Add the line
+              svg.append("path")
+                .datum(data)
+                .attr("fill", "none")
+                .attr("stroke", "steelblue")
+                .attr("stroke-width", 1.5)
+                .attr("d", d3.line()
+                  .x(function(d) { return x(d.Date) })
+                  .y(function(d) { return y(d.Pctchange_BTC_4weeks) })
+                );
+
+                // Add the 2nd line
+                  svg.append("path")
+                    .datum(data)
+                    .attr("fill", "none")
+                    .attr("stroke", "red")
+                    .attr("stroke-width", 1.5)
+                    .attr("d", d3.line()
+                      .x(function(d) { return x(d.Date) })
+                      .y(function(d) { return y(d.Pctchange_SPY_4weeks) })
+                    );
+          }
 
 }
 // Scene 3
