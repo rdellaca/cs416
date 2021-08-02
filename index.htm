@@ -137,7 +137,7 @@ function addScene1Volume(data) {
     .attr('y', function(d) { return yVolumeScale(d['BTC_Volume']) })
     .attr('fill', (d, i) => {
       if (i === 0) { return '#03a678';
-         } else {  return data[i - 1].close > d.close ? '#c0392b' : '#03a678';
+    } else {  return data[i - 1].BTC_Close > d.BTC_Close ? '#c0392b' : '#03a678';
       }
     })
     .attr('width', 1)
