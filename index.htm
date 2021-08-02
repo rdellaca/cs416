@@ -161,7 +161,7 @@ function loadScene1(data) {
   // text label for the Y axis
       svg.append("text")
           .attr("transform", "rotate(-90)")
-          .attr("y", 0)
+          .attr("y", 0 - margin.left)
           .attr("x",0 - (height / 2))
           .attr("dy", "1em")
           .style("text-anchor", "middle")
@@ -377,7 +377,7 @@ function loadScene3(data) {
 // change scene
 function changeScene(sceneNum) {
   if (sceneNum != activeScene) {
-    // switch scenes
+    // hide active scene
     if (activeScene == 1) {
       graph1.attr("display","none")
     } else if (activeScene == 2) {
@@ -385,6 +385,7 @@ function changeScene(sceneNum) {
     } else {
       graph3.attr("display","none")
     }
+    // display new scene
     if (sceneNum == 1) {
       graph1.attr("display","inline")
     } else if (sceneNum == 2) {
@@ -392,6 +393,7 @@ function changeScene(sceneNum) {
     } else {
       graph3.attr("display","inline")
     }
+    setDetails(sceneNum);
     activeScene = sceneNum;
   }
 };
