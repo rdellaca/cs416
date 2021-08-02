@@ -382,19 +382,19 @@ function changeScene(sceneNum) {
     console.log("changing scene to ", sceneNum);
     // hide active scene
     if (activeScene == 1) {
-      offscreen.appendChild(graph1)
+      offscreen.appendChild(document.getElementById("#graph1"))
     } else if (activeScene == 2) {
-      offscreen.appendChild(graph2)
+      offscreen.appendChild(document.getElementById("#graph2"))
     } else {
-      offscreen.appendChild(graph2)
+      offscreen.appendChild(document.getElementById("#graph3"))
     }
     // display new scene
     if (sceneNum == 1) {
-      graph.appendChild(graph1)
+      graph.appendChild(document.getElementById("#graph1"))
     } else if (sceneNum == 2) {
-      graph.appendChild(graph2)
+      graph.appendChild(document.getElementById("#graph2"))
     } else {
-      graph.appendChild(graph3)
+      graph.appendChild(document.getElementById("#graph3"))
     }
     setDetails(sceneNum);
     activeScene = sceneNum;
