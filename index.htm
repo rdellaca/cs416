@@ -91,19 +91,16 @@ var graph3 = d3.select("#graph3");
 var offscreen = document.getElementById("offscreen");
 
 var svg = graph1.append("svg")
-  svg
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
      .append("g").attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 var svg2 = graph2.append("svg")
-  svg2
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g").attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 var svg3 = graph3.append("svg")
-  svg3
     .attr("width", width + margin.left + margin.right)
           .attr("height", height + margin.top + margin.bottom)
     .append("g")
@@ -311,7 +308,7 @@ function changePeriod() {
     .range([ 0, width ]);
 
     var y = d3.scaleLinear()
-      .domain([d3.min(BTC_SPY_data, function(d) { return +d.Pctchange_BTC_1day; }), d3.max(data, function(d) { return +d.Pctchange_BTC_1day; })])
+      .domain([d3.min(BTC_SPY_data, function(d) { return +d.Pctchange_BTC_1day; }), d3.max(BTC_SPY_data, function(d) { return +d.Pctchange_BTC_1day; })])
       .range([ height, 0 ]);
 
 if (selectedValue == 1) {
