@@ -200,6 +200,14 @@ function addScene1Volume(data) {
     .domain([yMinVolume, yMaxVolume])
     .range([height, height/2]);
 
+    svg.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", width + margin.left)
+        .attr("x",0 - (height / 2))
+        .attr("dy", "1em")
+        .style("text-anchor", "middle")
+        .text("Volume (green: down day; red: up day)");
+
   // add to chart
   svg.selectAll('rect').data(data).enter().append('rect')
     .attr('x', function(d) { return x(d.Date) })
