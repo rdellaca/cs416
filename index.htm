@@ -74,21 +74,21 @@ var margin = {top: 10, right: 30, bottom: 30, left: 60},
 var graph = d3.select("#graph");
 var svg = graph.append("svg")
      .attr("viewbox", "0 0 500 500")
-     .append("g")
+  svg.append("g")
      .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 var svg2 = graph.append("svg")
-    .attr("viewbox", "0 0 500 500")
-    .append("g")
+  .attr("display","none")
+  .attr("viewbox", "0 0 500 500")
+  svg2.append("g")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 var svg3 = graph.append("svg")
-    .attr("viewbox", "0 0 500 500")
-    .append("g")
+  attr("display","none")
+  .attr("viewbox", "0 0 500 500")
+  svg3.append("g")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
-svg2.attr("display","none");
-svg3.attr("display","none");
 
   svg.attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
