@@ -175,7 +175,7 @@ function addScene1Volume(data) {
   const yVolumeScale = d3
     .scaleLinear()
     .domain([yMinVolume, yMaxVolume])
-    .range([height, 2*height/3]);
+    .range([height, height/2]);
 
   // add to chart
   svg.selectAll('rect').data(data).enter().append('rect')
