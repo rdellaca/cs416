@@ -91,24 +91,25 @@ var graph3 = d3.select("#graph3");
 var offscreen = document.getElementById("offscreen");
 
 var svg = graph1.append("svg")
-  svg.append("g")
-     .attr("transform",
+  svg
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+     .append("g").attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 var svg2 = graph2.append("svg")
-  svg2.append("g")
-    .attr("transform",
+  svg2
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g").attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 var svg3 = graph3.append("svg")
-  svg3.append("g")
+  svg3
+    .attr("width", width + margin.left + margin.right)
+          .attr("height", height + margin.top + margin.bottom)
+    .append("g")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 
-  svg.attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    svg2.attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
-      svg3.attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
 
 // Make a variable for the text details
 var div_details = document.getElementById('details');
