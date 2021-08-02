@@ -31,12 +31,15 @@ a.scene-link:hover, a.selected {
 
 #graph1{
   display: inline;
+  overflow: hidden;
 }
 #graph2{
   display: none;
+  overflow: hidden;
 }
 #graph3{
   display: none;
+  overflow: hidden;
 }
 
 #details{
@@ -377,6 +380,7 @@ function loadScene3(data) {
 // change scene
 function changeScene(sceneNum) {
   if (sceneNum != activeScene) {
+    console.log("changing scene to ", sceneNum);
     // hide active scene
     if (activeScene == 1) {
       graph1.attr("display","none")
